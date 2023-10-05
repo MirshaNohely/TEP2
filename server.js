@@ -25,11 +25,11 @@ app.get('/data', (req, res) => {
 });
 
 app.post('/data', (req, res) => {
-    const newData = req.body;
+    const { name, age, matricula, numero } = req.body;
     try {
         const rawData = fs.readFileSync('data.json');
         const data = JSON.parse(rawData);
-        data.push(newData);
+        data.push({ name, age, matricula, numero });
         fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
         res.json({ message: 'Data added successfully' });
     } catch (error) {
@@ -40,13 +40,15 @@ app.post('/data', (req, res) => {
 
 app.put('/data/:index', (req, res) => {
     const index = req.params.index;
-    const { name, age } = req.body;
+    const { name, age, matricula, numero } = req.body;
     try {
         const rawData = fs.readFileSync('data.json');
         const data = JSON.parse(rawData);
         if (index >= 0 && index < data.length) {
             data[index].name = name;
             data[index].age = age;
+            data[index].matricula = matricula;
+            data[index].numero = numero;
             fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
             res.json({ message: 'Data updated successfully' });
         } else {
@@ -57,6 +59,7 @@ app.put('/data/:index', (req, res) => {
         res.status(500).json({ error: 'Error al actualizar los datos' });
     }
 });
+
 
 app.delete('/data/:index', (req, res) => {
     const index = req.params.index;

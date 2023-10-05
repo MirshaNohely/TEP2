@@ -1,10 +1,8 @@
 [
   {
-    "name": "juan",
-    "age": 25
-  },
-  {
-    "name": "phokyn",
-    "age": 56
+    "name": "persona",
+    "age": 19,
+    "matricula": "3150011",
+    "numero": "5221212"
   }
 ]
