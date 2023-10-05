@@ -24,6 +24,13 @@ addForm.addEventListener('submit', function (event) {
     const matricula = document.getElementById('matricula').value;
     const numero = document.getElementById('numero').value;
 
+    // Validación para asegurarse de que name y matricula contengan solo letras y age y numero contengan solo números
+    if (/[^A-Za-z\s]/.test(name) || /[^0-9]/.test(age) || /[^0-9]/.test(matricula) || /[^0-9]/.test(numero)) {
+        // Mostrar un mensaje de error si los datos no cumplen con los requisitos
+        alert('Por favor, verifique que los campos estén completos y correctamente.');
+        return;
+    }
+
     if (name && age && matricula && numero) {
         fetch('/data', {
             method: 'POST',
@@ -39,9 +46,11 @@ addForm.addEventListener('submit', function (event) {
             })
             .catch(error => console.error('Error adding data:', error));
     } else {
-        console.log('Por favor, ingrese todos los campos requeridos.');
+        // Mostrar un mensaje de error si falta información
+        alert('Por favor, complete todos los campos.');
     }
 });
+
 
 function editData(index, newName, newAge, newMatricula, newNumero) {
     const updatedName = prompt('Nuevo nombre:', newName);
