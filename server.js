@@ -1,9 +1,11 @@
+const cors = require('cors');
 const express = require('express');
 const app = express();
 const PORT = 5000;
 const path = require('path');
 const fs = require('fs');
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
@@ -38,7 +40,7 @@ app.post('/data', (req, res) => {
     }
 });
 
-app.put('/data/:index', (req, res) => {
+app.put('/data:index', (req, res) => {
     const index = req.params.index;
     const { name, age, matricula, numero } = req.body;
     try {
@@ -61,7 +63,7 @@ app.put('/data/:index', (req, res) => {
 });
 
 
-app.delete('/data/:index', (req, res) => {
+app.delete('/data:index', (req, res) => {
     const index = req.params.index;
     try {
         const rawData = fs.readFileSync('data.json');

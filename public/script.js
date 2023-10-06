@@ -2,7 +2,7 @@ const dataContainer = document.getElementById('data');
 const addForm = document.getElementById('addForm');
 
 function fetchData() {
-    fetch('/data')
+    fetch('/data/')
         .then(response => response.json())
         .then(data => {
             dataContainer.innerHTML = "<h2>Datos:</h2>";
@@ -32,7 +32,7 @@ addForm.addEventListener('submit', function (event) {
     }
 
     if (name && age && matricula && numero) {
-        fetch('/data', {
+        fetch('/data/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,6 +43,11 @@ addForm.addEventListener('submit', function (event) {
             .then(data => {
                 console.log(data);
                 fetchData();
+                // Limpiar los campos del formulario después de agregar
+                document.getElementById('name').value = '';
+                document.getElementById('age').value = '';
+                document.getElementById('matricula').value = '';
+                document.getElementById('numero').value = '';
             })
             .catch(error => console.error('Error adding data:', error));
     } else {
@@ -50,6 +55,7 @@ addForm.addEventListener('submit', function (event) {
         alert('Por favor, complete todos los campos.');
     }
 });
+
 
 
 function editData(index, newName, newAge, newMatricula, newNumero) {
