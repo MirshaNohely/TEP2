@@ -9,75 +9,64 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-app.get('/data', (req, res) => {
+const dataFilePath = 'data.json';
+
+// Middleware para leer el archivo data.json
+function readDataFile(req, res, next) {
     try {
-        const rawData = fs.readFileSync('data.json');
-        const data = JSON.parse(rawData);
-        res.json(data);
+        const rawData = fs.readFileSync(dataFilePath);
+        req.data = JSON.parse(rawData);
+        next();
     } catch (error) {
         if (error.code === 'ENOENT') {
             // El archivo no existe, inicializarlo con un array vacío
-            fs.writeFileSync('data.json', '[]');
-            res.json([]); // Devolver un array vacío
+            fs.writeFileSync(dataFilePath, '[]');
+            req.data = [];
+            next();
         } else {
             console.error(error);
             res.status(500).json({ error: 'Error al leer los datos' });
         }
     }
+}
+
+// Ruta para obtener todos los datos
+app.get('/data', readDataFile, (req, res) => {
+    res.json(req.data);
 });
 
-app.post('/data', (req, res) => {
+// Ruta para agregar nuevos datos
+app.post('/data', readDataFile, (req, res) => {
     const { name, age, matricula, numero } = req.body;
-    try {
-        const rawData = fs.readFileSync('data.json');
-        const data = JSON.parse(rawData);
-        data.push({ name, age, matricula, numero });
-        fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
-        res.json({ message: 'Data added successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al agregar datos' });
+    req.data.push({ name, age, matricula, numero });
+    fs.writeFileSync(dataFilePath, JSON.stringify(req.data, null, 2));
+    res.json({ message: 'Data added successfully' });
+});
+
+// Ruta para actualizar datos por índice
+app.put('/data/:index', readDataFile, (req, res) => {
+    const { index } = req.params;
+    const { name, age, matricula, numero } = req.body;
+    
+    if (index >= 0 && index < req.data.length) {
+        req.data[index] = { name, age, matricula, numero };
+        fs.writeFileSync(dataFilePath, JSON.stringify(req.data, null, 2));
+        res.json({ message: 'Data updated successfully' });
+    } else {
+        res.status(400).json({ error: 'Invalid index' });
     }
 });
 
-app.put('/data:index', (req, res) => {
-    const index = req.params.index;
-    const { name, age, matricula, numero } = req.body;
-    try {
-        const rawData = fs.readFileSync('data.json');
-        const data = JSON.parse(rawData);
-        if (index >= 0 && index < data.length) {
-            data[index].name = name;
-            data[index].age = age;
-            data[index].matricula = matricula;
-            data[index].numero = numero;
-            fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
-            res.json({ message: 'Data updated successfully' });
-        } else {
-            res.status(400).json({ error: 'Invalid index' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al actualizar los datos' });
-    }
-});
-
-
-app.delete('/data:index', (req, res) => {
-    const index = req.params.index;
-    try {
-        const rawData = fs.readFileSync('data.json');
-        const data = JSON.parse(rawData);
-        if (index >= 0 && index < data.length) {
-            data.splice(index, 1);
-            fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
-            res.json({ message: 'Data deleted successfully' });
-        } else {
-            res.status(400).json({ error: 'Invalid index' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error al eliminar los datos' });
+// Ruta para eliminar datos por índice
+app.delete('/data/:index', readDataFile, (req, res) => {
+    const { index } = req.params;
+    
+    if (index >= 0 && index < req.data.length) {
+        req.data.splice(index, 1);
+        fs.writeFileSync(dataFilePath, JSON.stringify(req.data, null, 2));
+        res.json({ message: 'Data deleted successfully' });
+    } else {
+        res.status(400).json({ error: 'Invalid index' });
     }
 });
 
