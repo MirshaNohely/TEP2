@@ -9,27 +9,45 @@
 </head>
 
 <body class="fondo">
+    <section>
+        <div class="contenedor">
+            <div class="formulario">
+                <form id="addForm">
+                    <h2>Agregar Nuevo Usuario</h2>
+                    <div class="input-contenedor"> 
+                        <input type="text" id="name" required>
+                        <label for="name">Nombre:</label>
+                    </div>
+
+                    <div class="input-contenedor">
+                        <input type="number" id="age" required>
+                        <label for="age">Edad:</label>
+                        
+                    </div>
+                        
+                    
+                    <div class="input-contenedor">
+                        <input type="text" id="matricula" required>
+                        <label for="matricula">Matrícula:</label>
+                        
+                    </div>
+
+                    <div class="input-contenedor">
+                        <input type="text" id="numero" required>
+                        <label for="numero">Número:</label>
+                        
+                    </div>
+                </form>
+
+                <div>   
+                    <button class="form" type="submit">Agregar</button>
+                </div>
+            </div>
+            
+        </div>
+        <div id="data"></div>   
+</section>
     
-
-    <h1>Agregar Nuevo Usuario</h1>
-    <form id="addForm">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" required><br><br>
-
-        <label for="age">Edad:</label>
-        <input type="number" id="age" required><br><br>
-
-        <label for="matricula">Matrícula:</label>
-        <input type="text" id="matricula" required><br><br>
-
-        <label for="numero">Número:</label>
-        <input type="text" id="numero" required><br><br>
-
-        <button type="submit">Agregar</button>
-    </form>
-
-    <div id="data"></div>
-
     <script src="script.js"></script>
 </body>
 

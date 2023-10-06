@@ -1,53 +1,102 @@
- 
-body {
-    font-family: 'Times New Roman', Times, serif;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto; 
-}
 
-h1 {
-    color: #fff;
-    text-align: center;
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    
 }
 
 .fondo{
-    background: linear-gradient(rgba(5, 7, 12, 0.6),rgba(5, 7, 12, 0.6)), url(image/fondo.jpeg) repeat;
-    background-size: 100%;
+    background: url(image/fondo.jpeg) repeat;
+    background-position: center;
+    background-size: cover;
+}
+.contenedor{
+    position: relative;
+    width: 450px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-form {
-    background-image: linear-gradient(to right top, #d16ba5, #c777b9,
-     #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-    max-width: 210px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 7px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.contenedor h2{
+    font-size: 2rem;
+    color: white;
+    text-align: center;
 }
 
-label {
-    display: block;
+.input-contenedor{
+    position: relative;
+    margin: 30px 0;
+    width: 300px;
+    border-bottom: 2px solid #fff;
+}
+
+.input-contenedor label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: .6s;
     font-weight: bold;
-    margin-bottom: 10px; 
 }
 
-input{
-    width: 200px;
-    height: 20px;
-    border-radius: 2px;
+input:focus ~ label,
+input:valid ~ label{
+    top: -5px;
 }
 
-input:invalid:required{
-    border: 2px dashed red;
-    color: red;
+.input-contenedor input{
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: -35px 0 5px;
+    color: #fff; 
 }
 
-input:invalid{
-    border: 2px dashed red;
-    color: red;
+.input-contenedor i{
+    position: absolute;
+    color: #fff;
+    font-size: 1.6rem;
+    top: 19px;
+    right: 8px;
 }
+
+.form{
+    width: 100%;
+    height: 45px;
+    border-radius: 40px;
+    background: black;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    font-size: 1rem;
+    transition: .4s;
+}
+
+.form:hover{
+    opacity: .9;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 
 button {
     background: black;
@@ -99,8 +148,9 @@ button::before{
     border-radius: 5px;
     background-size: 100%;
     color: aliceblue;
-    font-family: 'monserrat';
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
+    
 }
 
 
