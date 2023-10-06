@@ -27,7 +27,7 @@ Navegue hasta la ubicación de su proyecto utilizando el comando cd (por ejemplo
 Ejecute el siguiente comando para instalar las dependencias necesarias: npm install express.
 Una vez que se completen las instalaciones, ejecute el siguiente comando para iniciar el servidor local: node server.js.
 Verá un mensaje que dice "Servidor Node.js escuchando en el puerto 5000".
-Abra su navegador web y escriba en la barra de direcciones: http://localhost:5000/public/.
+Abra su navegador web y escriba en la barra de direcciones: http://localhost:5000
 Esto le permitirá acceder al formulario a través de su servidor local. Puede ingresar datos en el formulario y, al hacer clic en "Enviar", verá un mensaje 
 en la parte inferior de la página que dice "Datos guardados con éxito".
 
