@@ -21,6 +21,10 @@ Método 2 - Servidor Local (localhost:5000):
 
 Si prefiere trabajar localmente en su máquina y ver los datos enviados, aquí están los pasos para configurar y ejecutar el formulario en su servidor local:
 Asegúrese de tener Node.js instalado en su computadora.
+Abra Visual Studio Code y haga clic en "Archivo" en la parte superior izquierda de la ventana.
+Seleccione la opción "Abrir carpeta" y elija la carpeta del proyecto TEP que desea abrir.
+Una vez que su proyecto esté abierto en Visual Studio Code, abra una nueva terminal haciendo clic en "Terminal" en la barra de menú superior y luego seleccionando "Nueva terminal". Esto abrirá una terminal en la parte inferior de la ventana.
+En la terminal, ingrese el siguiente comando y presione "Enter" para instalar las dependencias necesarias para hacer la conexión con Node.js.
 Abra la terminal de su sistema operativo.
 Navegue hasta la ubicación de su proyecto utilizando el comando cd (por ejemplo, cd Documents/TEP2).
 Ejecute el siguiente comando para instalar las dependencias necesarias: npm install express.
